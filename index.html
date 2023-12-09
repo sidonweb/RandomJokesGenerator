@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jokes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    .background-animate {
+      background-size: 400%;
+
+      -webkit-animation: AnimationName 30s ease infinite;
+      -moz-animation: AnimationName 30s ease infinite;
+      animation: AnimationName 30s ease infinite;
+    }
+
+    @keyframes AnimationName {
+      0% {
+        background-color: #e74c3c;
+      }
+
+      20% {
+        background-color: #f1c40f;
+      }
+
+      40% {
+        background-color: #1abc9c;
+      }
+
+      60% {
+        background-color: #3498db;
+      }
+
+      80% {
+        background-color: #9b59b6;
+      }
+
+      100% {
+        background-color: #e74c3c;
+      }
+    }
+  </style>
+
+  <div class="h-screen flex bg-black justify-center items-center w-full background-animate">
+    <div class="max-w-sm p-6 bg-white rounded-lg shadow-md shadow-slate-800 dark:bg-zinc-700 dark:border-gray-700">
+      <button onclick="getJoke()">
+        <h5 id="quoteText" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Click for a joke
+          🤡
+        </h5>
+      </button>
+    </div>
+    <footer class="fixed bottom-0 static font-bold text-gray-700 text-center">
+      <p>&copy; <a href="https://www.sidonweb.com">sidonweb.com</a></p>
+    </footer>
+  </div>
+  
+  <script src="index.js"></script>
+  <script>
+    function getJoke() {
+      fetch('/getjoke')
+        .then(response => response.json())
+        .then(data => {
+          // Update the DOM with the joke text
+          document.getElementById('quoteText').innerText = data.joke;
+        })
+        .catch(error => {
+          console.error('Error fetching joke:', error);
+        });
+    }
+  </script>
+</body>
+
+
+
+</html>
